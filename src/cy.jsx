@@ -6,7 +6,7 @@ class MyComp extends React.Component {
   constructor() {
     super();
     var a = {
-      name: '123'
+      name: '1234'
     }
     console.log(_.get(a, 'name'));
   }
