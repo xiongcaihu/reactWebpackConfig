@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+// process.env.NODE_ENV = 'development';
+
 module.exports = {
     mode: 'development',
     devtool: 'inline-cheap-source-map',
@@ -58,11 +60,15 @@ module.exports = {
                 }]
             },
             {
-                test: /\.(s)?css$/,
+                test: /\.(le|sa|c)ss$/,
                 use: [
-                    "style-loader", // creates style nodes from JS strings
-                    "css-loader", // translates CSS into CommonJS
-                    "sass-loader", // compiles Sass to CSS, using Node Sass by default
+                    "style-loader",
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
                     'postcss-loader'
                 ]
             },
@@ -105,7 +111,7 @@ module.exports = {
         contentBase: './dist',
         inline: true,
         compress: true,
-        open: true, // 自动打开浏览器页面
+        open: false, // 自动打开浏览器页面
         proxy: { // 配置代理
             // '/api': 'http://localhost:3000'
         }
