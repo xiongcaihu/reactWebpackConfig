@@ -1,5 +1,5 @@
 import React from 'react';
-import './cy.scss';
+import './cy.css';
 import img from './assets/react.jpg';
 
 class MyComp extends React.Component {
