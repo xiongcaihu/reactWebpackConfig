@@ -2,8 +2,10 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const mode = process.env.Node_ENV.trim();
+
 module.exports = {
-    mode: 'production', // development
+    mode: mode,
     entry: {
         vendor: ['react', 'react-dom', 'lodash']
     },
