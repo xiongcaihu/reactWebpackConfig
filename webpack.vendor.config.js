@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    mode: 'production',
+    mode: 'production', // development
     entry: {
         vendor: ['react', 'react-dom', 'lodash']
     },
