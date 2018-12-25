@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const mode = process.env.Node_ENV.trim();
+const mode = process.env.NODE_ENV.trim();
 
 var config = {
   mode: mode,
@@ -66,7 +66,7 @@ var config = {
           loader: 'css-loader',
           options: {
             importLoaders: 1,
-            modules: true,
+            modules: false,
           }
         },
         'postcss-loader'
@@ -129,10 +129,14 @@ if (mode == 'development') {
     contentBase: './dist',
     inline: true,
     compress: true,
+    disableHostCheck: true,
+    host: '0.0.0.0',
+    useLocalIp: true,
     open: false, // 自动打开浏览器页面
     proxy: { // 配置代理
       // '/api': 'http://localhost:3000'
-    }
+    },
+    port: 8080
     // clientLogLevel: 'info', watchContentBase: true
   }
 }
