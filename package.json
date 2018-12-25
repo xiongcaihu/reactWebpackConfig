@@ -6,8 +6,8 @@
   "scripts": {
     "devConfig": "node_modules/.bin/webpack-dev-server --config webpack.config.js",
     "buildConfig": "node_modules/.bin/webpack --config webpack.config.js",
-    "dev": "set NODE_ENV=development && npm run dll && npm run devConfig",
-    "build": "set NODE_ENV=production && npm run dll && npm run buildConfig",
+    "dev": "cross-env NODE_ENV=development npm run dll && cross-env NODE_ENV=development npm run devConfig",
+    "build": "cross-env NODE_ENV=production npm run dll && cross-env NODE_ENV=production npm run buildConfig",
     "test": "node_modules/.bin/webpack --config webpack.config.js",
     "dll": "node_modules/.bin/webpack --config webpack.vendor.config.js"
   },
@@ -30,6 +30,7 @@
     "css-loader": "^1.0.1",
     "cssnano": "^4.1.7",
     "cssnano-preset-advanced": "^4.0.5",
+    "cross-env": "^5.2.0",
     "file-loader": "^2.0.0",
     "html-webpack-include-assets-plugin": "^1.0.6",
     "html-webpack-plugin": "^3.2.0",
