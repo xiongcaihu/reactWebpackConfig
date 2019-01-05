@@ -14,34 +14,30 @@ var config = {
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].js"
+    filename: mode == "production" ? "[name].[hash].js" : "[name].js"
   },
   plugins: [
     // new webpack.ProgressPlugin((percentage, ...args) => {
     //   console.info(parseInt(percentage * 100), '%', ...args);
     // }),
     new CleanWebpackPlugin(["dist"]),
-    new CopyWebpackPlugin([
-      {
-        from: {
-          glob: path.resolve(__dirname, "dll/**/*"),
-          dot: true
-        },
-        to: path.resolve(__dirname, "dist")
-      }
-    ]),
+    new CopyWebpackPlugin([{
+      from: {
+        glob: path.resolve(__dirname, "dll/**/*"),
+        dot: true
+      },
+      to: path.resolve(__dirname, "dist")
+    }]),
     new HtmlWebpackPlugin({
       template: "./index.html",
       minify: true
     }),
     new HtmlWebpackIncludeAssetsPlugin({
-      assets: [
-        {
-          path: "dll",
-          glob: "*.js",
-          globPath: path.resolve(__dirname, "dll")
-        }
-      ],
+      assets: [{
+        path: "dll",
+        glob: "*.js",
+        globPath: path.resolve(__dirname, "dll")
+      }],
       append: false
     }),
     new webpack.ProvidePlugin({
@@ -49,18 +45,15 @@ var config = {
     })
   ],
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(png|jpg|jpeg|gif)$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              outputPath: "images/"
-            }
+        use: [{
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]",
+            outputPath: "images/"
           }
-        ]
+        }]
       },
       {
         test: /\.css$/,
@@ -108,23 +101,6 @@ var config = {
       "@": path.resolve(__dirname, "src")
     }
   },
-  optimization: {
-    splitChunks: {
-      chunks: "all",
-      minChunks: 1,
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10
-        },
-        default: {
-          minChunks: 1,
-          priority: -20,
-          reuseExistingChunk: true
-        }
-      }
-    }
-  },
   performance: {
     hints: false
   }
@@ -148,8 +124,14 @@ if (mode == "development") {
     useLocalIp: true,
     open: false, // 自动打开浏览器页面
     proxy: {
-      // 配置代理
-      // '/api': 'http://localhost:3000'
+      // '/tables': {
+      //   target: 'http://93.179.103.52:5000/table',
+      //   pathRewrite: {
+      //     '^/tables': ''
+      //   },
+      //   changeOrigin: true,
+      //   secure: false, // 接受 运行在 https 上的服务
+      // }
     },
     port: 8080
     // clientLogLevel: 'info', watchContentBase: true
