@@ -5,20 +5,20 @@ import { renderRoutes } from "react-router-config";
 import { Link, Redirect } from "react-router-dom";
 
 @observer
-class Home extends React.Component {
+class MyRoot extends React.Component {
   render() {
     let { history, location, route } = this.props;
+    console.log(this.props);
     return (
       <div>
-        home
-        <Link to="/home/home1">home1</Link>
-        <Link to="/home/home2">home2</Link>
-        {location.pathname == "/home" ? <Redirect to="/home/home1" /> : ""}
-        <div>--------------------</div>
+        root
+        {location.pathname == "/" ? <Redirect to="/home" /> : ""}
+        {location.pathname == "/home" ? <Redirect to="/home" /> : ""}
+        {location.pathname == "/home/home1" ? <Redirect to="/home/home1" /> : ""}
         {renderRoutes(this.props.route.childs)}
       </div>
     );
   }
 }
 
-export default Home;
+export default MyRoot;
